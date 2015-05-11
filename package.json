@@ -1,0 +1,22 @@
+{
+  "name": "snippets-mongoose",
+  "version": "0.0.0",
+  "description": "Intro to Mongoose",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tstuart/snippets-mongoose.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tstuart/snippets-mongoose/issues"
+  },
+  "homepage": "https://github.com/tstuart/snippets-mongoose",
+  "dependencies": {
+    "mongoose": "^4.0.2"
+  }
+}
