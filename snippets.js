@@ -27,7 +27,7 @@ mongoose.connection.once('open', function() {
         return;
       }
       console.log("Created snippet", snippet.name);
-      mongoose.disconnet();
+      mongoose.disconnect();
     });
   }; // End Create
   
@@ -36,7 +36,7 @@ mongoose.connection.once('open', function() {
     Snippet.findOne({name:name}, function(err, snippet) {
       if (err || !snippet) {
         console.error("Could Not Read Snippet", name);
-        mongoose.disconnet();
+        mongoose.disconnect();
         return;
       }
       console.log("Read snippet", snippet.name);
