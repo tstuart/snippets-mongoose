@@ -13,4 +13,23 @@ mongoose.connection.once('open', function() {
   });
   
   var Snippet = mongoose.model('Snippet', snippetSchema);
+  
+  // Create a document
+  var create = function(name, content) {
+    var snippet = {
+      name: name,
+      content: content
+    };
+    Snippet.create(snippet, function(err, snippet) {
+      if (err || !snippet) {
+        console.error("Could not create snippet", name);
+        mongoose.disconnect();
+        return;
+      }
+      console.log("Created snippet", snippet.name);
+      mongoose.disconnet();
+    });
+  }; // End Create
+  
+  
 });
