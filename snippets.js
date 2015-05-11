@@ -48,23 +48,27 @@ mongoose.connection.once('open', function() {
   // Update Method
   var update = function(name, content) {
     Snippet.findOneAndUpdate({name: name}, {content: content}, function(err, snippet) {
-      console.error("Could Not Update Snippet", name);
+      if (err || !Snippet) {
+        console.error("Could Not Update Snippet", name);
+        mongoose.disconnect();
+        return;
+      }
+      console.log("Updated snippet", snippet.name);
       mongoose.disconnect();
-      return;
-    });
-    console.log("Updated snippet", snippet.name);
-    mongoose.disconnect();
+    });    
   }; // End Update Method
   
   // Delete Method
   var del = function(name) {
     Snippet.findOneAndRemove({name: name}, function(err, snippet) {
-      console.error("Could Not Delete Snippet", name);
+      if (err || !snippet) {
+        console.error("Could Not Delete Snippet", name);
+        mongoose.disconnect();
+        return;
+      }
+      console.log("Deleted Snippet", snippet.name);
       mongoose.disconnect();
-      return;
-    });
-    console.log("Deleted Snippet", snippet.name);
-    mongoose.disconnect();
+    });    
   }; // End Delete Method
   
   var main = function() {
@@ -82,7 +86,7 @@ mongoose.connection.once('open', function() {
     }
     else {
       console.error('Command not recognized');
-      db.close();
+      mongoose.disconnect();
     }
   }
   
