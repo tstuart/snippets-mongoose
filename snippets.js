@@ -45,4 +45,16 @@ mongoose.connection.once('open', function() {
     });  
   }; // End Read Method
   
+  // Update Method
+  var update = function(name, content) {
+    Snippet.findOneAndUpdate({name: name}, {content: content}, function(err, snippet) {
+      console.error("Could Not Update Snippet", name);
+      mongoose.disconnect();
+      return;
+    });
+    console.log("Updated snippet", snippet.name);
+    mongoose.disconnect();
+  }; // End Update Method
+  
+  
 });
