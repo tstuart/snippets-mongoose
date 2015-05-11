@@ -14,7 +14,7 @@ mongoose.connection.once('open', function() {
   
   var Snippet = mongoose.model('Snippet', snippetSchema);
   
-  // Create a document
+  // Create Method
   var create = function(name, content) {
     var snippet = {
       name: name,
@@ -31,5 +31,18 @@ mongoose.connection.once('open', function() {
     });
   }; // End Create
   
+  // Read Method
+  var read = function(name, callback) {
+    Snippet.findOne({name:name}, function(err, snippet) {
+      if (err || !snippet) {
+        console.error("Could Not Read Snippet", name);
+        mongoose.disconnet();
+        return;
+      }
+      console.log("Read snippet", snippet.name);
+      console.log(snippet.content);
+      mongoose.disconnect();
+    });  
+  }; // End Read Method
   
 });
