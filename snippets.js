@@ -32,7 +32,7 @@ mongoose.connection.once('open', function() {
   }; // End Create
   
   // Read Method
-  var read = function(name, callback) {
+  var read = function(name) {
     Snippet.findOne({name:name}, function(err, snippet) {
       if (err || !snippet) {
         console.error("Could Not Read Snippet", name);
@@ -56,5 +56,15 @@ mongoose.connection.once('open', function() {
     mongoose.disconnect();
   }; // End Update Method
   
+  // Delete Method
+  var del = function(name) {
+    Snippet.findOneAndRemove({name: name}, function(err, snippet) {
+      console.error("Could Not Delete Snippet", name);
+      mongoose.disconnect();
+      return;
+    });
+    console.log("Deleted Snippet", snippet.name);
+    mongoose.disconnect();
+  }; // End Delete Method
   
 });
